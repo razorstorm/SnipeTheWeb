@@ -205,7 +205,7 @@ Target.prototype.move = function()
 }
 Target.prototype.hitGround = function()
 {
-	return window.innerHeight - (this.getY() + this.domElement.height()) < 20;
+	return (window.innerHeight+$(document).scrollTop()) - (this.getY() + this.domElement.height()) < 20;
 }
 Target.prototype.bounce = function()
 {
