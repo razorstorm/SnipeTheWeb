@@ -7,7 +7,7 @@
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // ==/UserScript==
 // auther:  petrifiednightmares
-// version: 0.0.0
+// version: 0.0.1
 
 var r;
 
