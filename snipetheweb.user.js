@@ -114,7 +114,8 @@ Reticule.prototype.getTarget= function()
 }
 Reticule.prototype.impact= function(target)
 {
-	new Target(target);
+	if(target.offset() != null)
+		new Target(target);
 }
 Reticule.prototype.recoil = function(callBack)
 {
