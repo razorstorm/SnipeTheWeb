@@ -1,0 +1,1 @@
+javascript:(function(){window.add_js=function(s){var k=(document.getElementsByTagName('head')[0]||document.body).appendChild(document.createElement('script'));k.src=s;k.type='text/javascript';};add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');add_js('http://dl.dropbox.com/u/3085200/destroy/destroy.js');}())
