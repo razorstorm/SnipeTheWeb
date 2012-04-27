@@ -7,7 +7,7 @@
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // ==/UserScript==
 // auther:  petrifiednightmares
-// version: 0.1.0
+// version: 0.1.1
 
 var r;
 
@@ -15,7 +15,7 @@ var ready=0;
 
 var Reticule = function(imageUrl,reloadSound,shootSound)
 {
-	this.domElement = $('<div style="position:absolute; pointer-events: none; width:200px; z-index: 100000; height: 200px; left:0px; top:0px;" id="aimingReticule"><img style="width: 100%; height:100%;" src="'+imageUrl+'"></img></div>')
+	this.domElement = $('<div class="snipetheweb" style="position:absolute; pointer-events: none; width:200px; z-index: 100000; height: 200px; left:0px; top:0px;" id="aimingReticule"><img style="width: 100%; height:100%;" src="'+imageUrl+'"></img></div>')
 	$('body').append(this.domElement);
 	this.speed= 50;
 	this.loaded=false;
@@ -162,8 +162,10 @@ Sound.prototype.stop= function()
 }
 var Target = function(domElement)
 {
-	this.domElement = domElement;
-	this.domElement.css("position","absolute");
+	domElement.addClass('snipetheweb-dom');
+
+	this.domElement = domElement
+	this.domElement.css({"position":"absolute", "z-index":1000});
 	
 	var rotation = Math.random()*361;
 	this.domElement.rotate(rotation+'deg');
@@ -174,7 +176,7 @@ var Target = function(domElement)
 	this.bounceTimes = parseInt(Math.random()*5)+10;
 	this.bounceCounter = 0;
 
-	this.domElement.css({"top":this.domElement.offset().top,"left":this.domElement.offset().left});
+	this.domElement.css({"top":domElement.offset().top,"left":domElement.offset().left});
 	this.move();
 }
 Target.prototype.move = function()
@@ -223,14 +225,13 @@ var Bullethole = function(x,y)
 	
 	var rotation = Math.random()*361;
 	
-	this.domElement = $('<img style="position:absolute;pointer-events: none; 10000; width:50px; height:50px; left:'+x+'px; top:'+y+'px;" src="'+urlList[imageIndex]+'"></img>');
+	this.domElement = $('<img class="snipetheweb" style="position:absolute;pointer-events: none; 10000; width:50px; height:50px; left:'+x+'px; top:'+y+'px;" src="'+urlList[imageIndex]+'"></img>');
 	
 	this.domElement.rotate(rotation+'deg');
 	
 	$('body').append(this.domElement);
 }
 $(document).ready(function() {
-	console.log('loaded');
 	var reloadSound = new Sound("reload","http://k004.kiwi6.com/hotlink/f36a597m7g/bolt_action.ogg","http://k004.kiwi6.com/hotlink/0m1284cug0/bolt_action.mp3");
 	var shootSound = new Sound("gunshot","http://k004.kiwi6.com/hotlink/x73d8t1487/gunshot.ogg","http://k004.kiwi6.com/hotlink/2u683o637q/gunshot.mp3");
 	
@@ -241,8 +242,22 @@ $(document).ready(function() {
 			$('body').append(loader);
 			runWhenReady(loader,reloadSound,shootSound);
 		}
+		else if (e.keyCode == 27)
+		{
+			unload();
+		}
 	});
 });
+
+function unload()
+{
+	$("html").css({"cursor":"auto"});
+	$('.snipetheweb').each(function(){
+		$(this).remove();
+	});
+	$(document).unbind('mousemove');
+	$(document).unbind('click');
+}
 
 function runWhenReady(loader,reloadSound,shootSound)
 {
