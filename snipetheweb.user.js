@@ -15,7 +15,7 @@ var ready=0;
 
 var Reticule = function(imageUrl,reloadSound,shootSound)
 {
-	this.domElement = $('<div style="position:absolute; pointer-events: none; width:200px; height: 200px; left:0px; top:0px;" id="aimingReticule"><img style="width: 100%; height:100%;" src="'+imageUrl+'"></img></div>')
+	this.domElement = $('<div style="position:absolute; pointer-events: none; width:200px; z-index: 100000; height: 200px; left:0px; top:0px;" id="aimingReticule"><img style="width: 100%; height:100%;" src="'+imageUrl+'"></img></div>')
 	$('body').append(this.domElement);
 	this.speed= 50;
 	this.loaded=false;
@@ -225,7 +225,7 @@ var Bullethole = function(x,y)
 	
 	var rotation = Math.random()*361;
 	
-	this.domElement = $('<img style="position:absolute;pointer-events: none;  width:50px; height:50px; left:'+x+'px; top:'+y+'px;" src="'+urlList[imageIndex]+'"></img>');
+	this.domElement = $('<img style="position:absolute;pointer-events: none; 10000; width:50px; height:50px; left:'+x+'px; top:'+y+'px;" src="'+urlList[imageIndex]+'"></img>');
 	
 	this.domElement.rotate(rotation+'deg');
 	
