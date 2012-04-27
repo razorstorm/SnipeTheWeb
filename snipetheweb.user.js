@@ -7,7 +7,7 @@
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // ==/UserScript==
 // auther:  petrifiednightmares
-// version: 0.0.2
+// version: 0.1.0
 
 var r;
 
@@ -24,7 +24,6 @@ var Reticule = function(imageUrl,reloadSound,shootSound)
 	this.moving= false;
 	
 	this.movementTimer;
-	this.move();
 	
 	var self= this;
 	
@@ -35,8 +34,7 @@ var Reticule = function(imageUrl,reloadSound,shootSound)
 }
 
 Reticule.prototype.followCursor = function (x,y) {
-	this.targetX = x;
-	this.targetY = y;
+	this.domElement.css({"left":x,"top":y});
 }
 
 Reticule.prototype.move = function()
