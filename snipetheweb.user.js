@@ -162,10 +162,15 @@ Sound.prototype.stop= function()
 }
 var Target = function(domElement)
 {
-	domElement.addClass('snipetheweb-dom');
+	domElement.addClass('snipetheweb-hidden');
+	this.domElement = domElement.clone();
 
-	this.domElement = domElement
+	this.domElement.addClass('snipetheweb');
 	this.domElement.css({"position":"absolute", "z-index":1000});
+	this.domElement.css({"top":domElement.offset().top,"left":domElement.offset().left});
+	domElement.hide();
+	
+	$('body').append(this.domElement);
 	
 	var rotation = Math.random()*361;
 	this.domElement.rotate(rotation+'deg');
@@ -176,7 +181,6 @@ var Target = function(domElement)
 	this.bounceTimes = parseInt(Math.random()*5)+10;
 	this.bounceCounter = 0;
 
-	this.domElement.css({"top":domElement.offset().top,"left":domElement.offset().left});
 	this.move();
 }
 Target.prototype.move = function()
@@ -201,7 +205,7 @@ Target.prototype.move = function()
 }
 Target.prototype.hitGround = function()
 {
-	return window.innerHeight - (this.getY() + this.domElement.height()) < 3;
+	return window.innerHeight - (this.getY() + this.domElement.height()) < 20;
 }
 Target.prototype.bounce = function()
 {
@@ -254,6 +258,9 @@ function unload()
 	$("html").css({"cursor":"auto"});
 	$('.snipetheweb').each(function(){
 		$(this).remove();
+	});
+	$('.snipetheweb-hidden').each(function(){
+		$(this).show();
 	});
 	$(document).unbind('mousemove');
 	$(document).unbind('click');
