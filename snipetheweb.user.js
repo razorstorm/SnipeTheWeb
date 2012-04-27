@@ -7,7 +7,7 @@
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // ==/UserScript==
 // auther:  petrifiednightmares
-// version: 0.1.1
+// version: 0.1.2
 
 var r;
 
@@ -279,6 +279,10 @@ function runWhenReady(loader,reloadSound,shootSound)
 			r.followCursor(e.pageX-100,e.pageY-100);
 		});
 		
+		$(document).scroll(function(e){
+			r.followCursor(e.pageX-100,e.pageY-100);
+		});
+		
 		$(document).click(function(e){
 			e.preventDefault();
 			r.fire();
@@ -286,7 +290,6 @@ function runWhenReady(loader,reloadSound,shootSound)
 	}
 	else
 	{
-		console.log(ready);
 		setTimeout(function(){runWhenReady(loader,reloadSound,shootSound)},300);
 	}
 }
@@ -580,13 +583,24 @@ units used in the rotation definition and then stripping the units off.
       check = (sl>0);
     }
 
-    if(!isRelative)
+    if(isRelative)
     {
-      x += $(document).scrollLeft();
-      y += $(document).scrollTop();
+      x -= $(document).scrollLeft();
+      y -= $(document).scrollTop();
     }
-
-    return document.elementFromPoint(x,y);
+	
+	var element = document.elementFromPoint(x,y);
+	var tagname = $(element).prop('tagName');
+	
+	if(tagname != undefined)
+	{
+		tagname=tagname.toLowerCase();
+		if(tagname != 'body' && tagname != 'html')
+			return element;
+		else
+			return [];
+	}
+	return [];
   }	
 
 })(jQuery);
