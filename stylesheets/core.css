@@ -2,7 +2,7 @@
 @import url("non-screen.css") handheld;
 @import url("non-screen.css") only screen and (max-device-width:640px);
 
-.snipetheweb
+.snipetheweb, .snipetheweb *
 {
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
