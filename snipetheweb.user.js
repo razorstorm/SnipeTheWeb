@@ -6,9 +6,15 @@
 // @include        https://*
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // ==/UserScript==
-// auther:  petrifiednightmares
-// version: 0.1.2
+// auther:  petrifiednightmares (Jason Jiang)
+// version: 0.1.3
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://sam.zoy.org/wtfpl/COPYING for more details. */ 
+ 
 var r;
 
 var ready=0;
@@ -229,7 +235,7 @@ var Bullethole = function(x,y)
 	
 	var rotation = Math.random()*361;
 	
-	this.domElement = $('<img class="snipetheweb" style="position:absolute;pointer-events: none; 10000; width:50px; height:50px; left:'+x+'px; top:'+y+'px;" src="'+urlList[imageIndex]+'"></img>');
+	this.domElement = $('<img class="snipetheweb" style="position:absolute;pointer-events: none; z-index: 10000; width:50px; height:50px; left:'+x+'px; top:'+y+'px;" src="'+urlList[imageIndex]+'"></img>');
 	
 	this.domElement.rotate(rotation+'deg');
 	
